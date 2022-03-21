@@ -21,7 +21,8 @@
         "code": 100,
         "ignoreStrings": true,
         "ignoreTemplateLiterals": true,
-        "ignoreRegExpLiterals": true
+        "ignoreRegExpLiterals": true,
+        "ignoreComments": true
       }
     ],
     "brace-style": [

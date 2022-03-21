@@ -10,11 +10,11 @@
     "seed:undo": "dotenv npm run unseed",
     "start": "per-env",
     "start:development": "dotenv nodemon ./bin/www",
-    "start:production": "./bin/www",
-    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client"
+    "start:production": "node ./bin/www"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "concurrently": "^7.0.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "csurf": "^1.11.0",

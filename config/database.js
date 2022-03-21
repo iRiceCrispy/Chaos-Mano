@@ -16,7 +16,6 @@ module.exports = {
       url: mongoUrl,
       options: {
         useNewUrlParser: true,
-        dbName: 'boss_manager',
       },
     },
   },
