@@ -56,6 +56,43 @@ partySchema.virtual('members', {
   autopopulate: true,
 });
 
+partySchema.methods.createNotification = async function createNotification(type = 'create') {
+  console.log(this.memberIds, this.leaderId);
+  const notification = new mongoose.models.PartyNotification({
+    senderId: this.leaderId,
+    receivers: this.memberIds
+      .filter(memberId => !memberId.equals(this.leaderId))
+      .map(memberId => ({ userId: memberId })),
+    partyId: this.id,
+  });
+
+  if (type === 'update') {
+    notification.action = 'UPDATE';
+    notification.content = {
+      type: 'NAME',
+      value: this.name,
+    };
+  }
+  else if (type === 'delete') {
+    notification.action = 'DELETE';
+    notification.content = {
+      type: 'NAME',
+      value: this.name,
+    };
+  }
+  else {
+    notification.action = 'CREATE';
+    notification.content = {
+      type: 'NAME',
+      value: this.name,
+    };
+  }
+
+  await notification.save();
+
+  return notification.id;
+};
+
 partySchema.plugin(autopopulate);
 
 module.exports = mongoose.model('Party', partySchema);

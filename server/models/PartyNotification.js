@@ -7,17 +7,14 @@ const PartyNotificationSchema = new mongoose.Schema({
     required: true,
   },
   content: {
-    type: String,
-    enum: ['NAME', 'MEMBERS'],
-  },
-  previous: {
-    type: String,
-  },
-  new: {
-    type: String,
+    type: {
+      type: String,
+      enum: ['NAME', 'MEMBERS'],
+    },
+    value: String,
   },
 }, {
   versionKey: false,
 });
 
-module.exports = Notification.discriminator('PartyNotification', PartyNotificationSchema, 'party');
+module.exports = Notification.discriminator('PartyNotification', PartyNotificationSchema, 'PARTY');

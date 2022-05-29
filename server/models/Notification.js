@@ -9,23 +9,27 @@ const receiverSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+}, {
+  _id: false,
 });
 
 const notificationSchema = new mongoose.Schema({
-  senderId: {
-    type: mongoose.ObjectId,
-    required: true,
-  },
-  receivers: [receiverSchema],
   action: {
     type: String,
     enum: ['CREATE', 'UPDATE', 'DELETE'],
     required: true,
     default: 'CREATE',
   },
+  senderId: {
+    type: mongoose.ObjectId,
+    required: true,
+  },
+  receivers: [receiverSchema],
 }, {
+  discriminatorKey: 'type',
   timestamps: {
     createdAt: true,
+    updatedAt: false,
   },
   versionKey: false,
 });

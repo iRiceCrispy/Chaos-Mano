@@ -77,6 +77,8 @@ router.post('/', validateParty, asyncHandler(async (req, res) => {
 
   socket.to(party.id).emit('updateParties');
 
+  await party.createNotification();
+
   res.json(data);
 }));
 
@@ -98,6 +100,8 @@ router.put('/:id', validateParty, asyncHandler(async (req, res, next) => {
   const socket = sockets[user.id];
   socket.to(party.id).emit('updateParties');
 
+  await party.createNotification('update');
+
   res.json(party);
 }));
 
@@ -114,6 +118,8 @@ router.delete('/:id', asyncHandler(async (req, res, next) => {
 
   const socket = sockets[user.id];
   socket.to(party.id).emit('updateParties');
+
+  await party.createNotification('delete');
 
   res.json(party);
 }));
