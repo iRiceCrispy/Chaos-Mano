@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { restoreSession } from './store/session';
+import { getSessionUser, restoreSession } from './store/session';
 import Auth from './components/Auth';
 import Dashboard from './components/Dashboard';
 import Splash from './components/Splash';
 
 const App = () => {
   const dispatch = useDispatch();
+  const sessionUser = useSelector(getSessionUser);
+  const [isLoaded, setIsLoaded] = useState(false);
   // document.addEventListener('keydown', (e) => {
   //   if (e.target.nodeName === 'INPUT' && e.key === 'Enter') e.preventDefault();
   // });
@@ -20,10 +22,13 @@ const App = () => {
       'XSRF-Token': Cookies.get('XSRF-TOKEN'),
     };
 
-    dispatch(restoreSession());
+    (async () => {
+      await dispatch(restoreSession());
+      setIsLoaded(true);
+    })();
   }, [dispatch]);
 
-  return (
+  return isLoaded && (
     <div className="app">
       <Routes>
         <Route
@@ -40,7 +45,7 @@ const App = () => {
         />
         <Route
           path="/dashboard/*"
-          element={<Dashboard />}
+          element={sessionUser ? <Dashboard /> : <Navigate to="/" />}
         />
         <Route
           path="*"
