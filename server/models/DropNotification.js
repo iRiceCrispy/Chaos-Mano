@@ -20,4 +20,4 @@ const DropNotificationSchema = new mongoose.Schema({
   versionKey: false,
 });
 
-module.exports = Notification.discriminator('DropNotification', DropNotificationSchema, 'PARTY');
+module.exports = Notification.discriminator('DropNotification', DropNotificationSchema, 'DROP');

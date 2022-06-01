@@ -7,7 +7,10 @@ const router = express.Router();
 
 router.get('/', requireAuth, asyncHandler(async (req, res) => {
   const { user } = req;
-  const notifications = await Notification.find({ receivers: { userId: user.id } });
+
+  const notifications = await Promise.all(Object.values(Notification.discriminators)
+    .map(discriminator => discriminator.find({ receivers: { $elemMatch: { userId: user.id } } })))
+    .then(promiseResults => promiseResults.reduce((arr, el) => arr.concat(el), []));
 
   res.json(notifications);
 }));

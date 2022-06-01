@@ -4,6 +4,7 @@ import session from './session';
 import users from './users';
 import parties from './parties';
 import drops from './drops';
+import notifications from './notifications';
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     users,
     parties,
     drops,
+    notifications,
   },
 });
 

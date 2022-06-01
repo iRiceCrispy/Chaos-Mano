@@ -5,7 +5,9 @@ import socket from '../../socket';
 import { fetchUsers } from '../../store/users';
 import { fetchParties } from '../../store/parties';
 import { fetchDrops } from '../../store/drops';
+import { fetchNotifications } from '../../store/notifications';
 import ProfileButton from '../ProfileButton';
+import Notifications from '../Notifications';
 import Main from './Main';
 import Parties from './Parties';
 import Drops from './Drops';
@@ -26,6 +28,7 @@ const Dashboard = () => {
       await dispatch(fetchUsers());
       await dispatch(fetchParties());
       await dispatch(fetchDrops());
+      await dispatch(fetchNotifications());
 
       setIsLoaded(true);
     })();
@@ -101,6 +104,9 @@ const Dashboard = () => {
       <div className="topbar">
         <div className="menu">
           <Link className="btn transparent menuItem" to="parties/create">Create new party</Link>
+        </div>
+        <div className="noti">
+          <Notifications />
         </div>
         <div className="auth">
           <ProfileButton />
