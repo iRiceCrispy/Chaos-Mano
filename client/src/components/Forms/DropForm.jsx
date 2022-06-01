@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import TagsDropDown from '../FormFields/TagsDropDown';
 import SearchDropDown from '../FormFields/SearchDropDown';
 import ValidationError from '../FormFields/ValidationError';
@@ -150,14 +149,6 @@ const DropForm = ({ edit }) => {
       </footer>
     </form>
   );
-};
-
-DropForm.propTypes = {
-  edit: PropTypes.bool,
-};
-
-DropForm.defaultProps = {
-  edit: false,
 };
 
 export default DropForm;

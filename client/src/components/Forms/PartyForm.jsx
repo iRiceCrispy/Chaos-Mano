@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import TagsDropDown from '../FormFields/TagsDropDown';
 import ValidationError from '../FormFields/ValidationError';
 import { getSessionUser } from '../../store/session';
@@ -101,14 +100,6 @@ const PartyForm = ({ edit }) => {
       </footer>
     </form>
   );
-};
-
-PartyForm.propTypes = {
-  edit: PropTypes.bool,
-};
-
-PartyForm.defaultProps = {
-  edit: false,
 };
 
 export default PartyForm;

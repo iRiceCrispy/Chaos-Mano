@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import { getSessionUser } from '../../store/session';
 import LoginForm from '../Forms/LoginForm';
 import SignupForm from '../Forms/SignupForm';
@@ -27,10 +26,6 @@ const Auth = ({ type }) => {
       </div>
     </div>
   );
-};
-
-Auth.propTypes = {
-  type: PropTypes.string.isRequired,
 };
 
 export default Auth;

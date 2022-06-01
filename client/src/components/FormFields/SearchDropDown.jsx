@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import DropDownMenu from './DropDownMenu';
 import './SearchDropDown.css';
 
@@ -67,28 +66,6 @@ const SearchDropDown = ({ id, placeholder, options, result, setResult, zIndex })
       </div>
     </div>
   );
-};
-
-SearchDropDown.propTypes = {
-  id: PropTypes.string,
-  placeholder: PropTypes.string,
-  options: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    }),
-  ),
-  result: PropTypes.string,
-  setResult: PropTypes.func.isRequired,
-  zIndex: PropTypes.number,
-};
-
-SearchDropDown.defaultProps = {
-  id: '',
-  placeholder: '',
-  zIndex: 0,
-  options: undefined,
-  result: undefined,
 };
 
 export default SearchDropDown;

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DropDownMenu from './DropDownMenu';
 import './TagsDropDown.css';
@@ -81,30 +80,6 @@ const TagsDropDown = ({ id, placeholder, options, results, setResult }) => {
       </div>
     </>
   );
-};
-
-TagsDropDown.propTypes = {
-  id: PropTypes.string,
-  placeholder: PropTypes.string,
-  options: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    }),
-  ),
-  results: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-  setResult: PropTypes.func.isRequired,
-};
-
-TagsDropDown.defaultProps = {
-  id: '',
-  placeholder: '',
-  options: undefined,
 };
 
 export default TagsDropDown;

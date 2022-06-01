@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './DropDownMenu.css';
 
 const DropDownMenu = ({ matches, setter, setShowMenu }) => (
@@ -23,20 +22,5 @@ const DropDownMenu = ({ matches, setter, setShowMenu }) => (
       : <div className="noResults">No results found.</div>}
   </div>
 );
-
-DropDownMenu.propTypes = {
-  matches: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    }),
-  ),
-  setter: PropTypes.func.isRequired,
-  setShowMenu: PropTypes.func.isRequired,
-};
-
-DropDownMenu.defaultProps = {
-  matches: undefined,
-};
 
 export default DropDownMenu;
