@@ -10,7 +10,9 @@ export const fetchNotifications = createAsyncThunk(
   },
 );
 
-const notificationsAdapter = createEntityAdapter();
+const notificationsAdapter = createEntityAdapter({
+  sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),
+});
 
 const initialState = notificationsAdapter.getInitialState();
 
