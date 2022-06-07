@@ -75,9 +75,9 @@ router.post('/', validateParty, asyncHandler(async (req, res) => {
     s.join(party.id);
   });
 
-  socket.to(party.id).emit('updateParties');
+  const notification = await party.createNotification();
 
-  await party.createNotification();
+  socket.to(party.id).emit('NEW_NOTIFICATION', notification);
 
   res.json(data);
 }));

@@ -57,7 +57,6 @@ partySchema.virtual('members', {
 });
 
 partySchema.methods.createNotification = async function createNotification(type = 'create') {
-  console.log(this.memberIds, this.leaderId);
   const notification = new mongoose.models.PartyNotification({
     senderId: this.leaderId,
     receivers: this.memberIds
@@ -90,7 +89,7 @@ partySchema.methods.createNotification = async function createNotification(type 
 
   await notification.save();
 
-  return notification.id;
+  return notification;
 };
 
 partySchema.plugin(autopopulate);

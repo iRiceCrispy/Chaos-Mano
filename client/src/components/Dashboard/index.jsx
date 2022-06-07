@@ -5,7 +5,7 @@ import socket from '../../socket';
 import { fetchUsers } from '../../store/users';
 import { fetchParties } from '../../store/parties';
 import { fetchDrops } from '../../store/drops';
-import { fetchNotifications } from '../../store/notifications';
+import { fetchNotifications, newNotification } from '../../store/notifications';
 import ProfileButton from '../ProfileButton';
 import Notifications from '../Notifications';
 import Main from './Main';
@@ -46,6 +46,10 @@ const Dashboard = () => {
 
     socket.on('updateDrops', () => {
       dispatch(fetchDrops());
+    });
+
+    socket.on('NEW_NOTIFICATION', (notification) => {
+      dispatch(newNotification(notification));
     });
   }, [dispatch]);
 
