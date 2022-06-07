@@ -15,6 +15,21 @@ const PartyNotificationSchema = new mongoose.Schema({
   },
 }, {
   versionKey: false,
+  toJSON: {
+    virtuals: true,
+    transform(doc, ret) {
+      return {
+        id: ret.id,
+        type: ret.type,
+        senderId: ret.senderId,
+        partyId: ret.partyId,
+        action: ret.action,
+        content: ret.content,
+        receivers: ret.receivers,
+        createdAt: ret.createdAt,
+      };
+    },
+  },
 });
 
 module.exports = Notification.discriminator('PartyNotification', PartyNotificationSchema, 'PARTY');
