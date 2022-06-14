@@ -8,6 +8,7 @@ import './Notifications.scss';
 const Notifications = () => {
   const ref = useRef();
   const notifications = useSelector(notificationsSelectors.selectAll);
+  const [count, setCount] = useState(0);
   const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
@@ -22,6 +23,12 @@ const Notifications = () => {
     return () => document.removeEventListener('click', closeMenu);
   }, [showMenu]);
 
+  useEffect(() => {
+    const unreadNotifications = notifications.filter(noti => !noti.read);
+
+    setCount(unreadNotifications.length);
+  }, [notifications]);
+
   return (
     <div id="notificationsContainer" ref={ref}>
       <button
@@ -31,6 +38,7 @@ const Notifications = () => {
       >
         <FontAwesomeIcon icon="fa-solid fa-bell" />
       </button>
+      {count > 0 && <span className="count">{count}</span>}
       {showMenu && (
         <ul
           className="notficationsMenu"
@@ -39,7 +47,7 @@ const Notifications = () => {
           onClick={e => e.stopPropagation()}
         >
           {notifications.map(notification => (
-            <li className="notification" key={notification.id}>
+            <li className={`notification${notification.read ? '' : ' unread'}`} key={notification.id}>
               <Notification notification={notification} />
             </li>
           ))}
