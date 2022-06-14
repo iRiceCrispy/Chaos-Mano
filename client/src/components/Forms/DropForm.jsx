@@ -100,7 +100,6 @@ const DropForm = ({ edit }) => {
           <SearchDropDown
             id="bossName"
             placeholder="Boss Name"
-            index={2}
             options={bosses}
             result={boss?.name}
             setResult={setBossId}
@@ -112,7 +111,6 @@ const DropForm = ({ edit }) => {
           <SearchDropDown
             id="itemName"
             placeholder="Item Name"
-            zIndex={1}
             options={items}
             disabled={!bossId}
             result={item?.name}

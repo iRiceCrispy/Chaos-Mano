@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { notificationsSelectors } from '../../store/notifications';
@@ -6,14 +6,15 @@ import Notification from './Notification';
 import './Notifications.scss';
 
 const Notifications = () => {
+  const ref = useRef();
   const notifications = useSelector(notificationsSelectors.selectAll);
   const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
-    if (!showMenu) return;
-
-    const closeMenu = () => {
-      setShowMenu(false);
+    const closeMenu = (e) => {
+      if (!ref.current?.contains(e.target)) {
+        setShowMenu(false);
+      }
     };
 
     document.addEventListener('click', closeMenu);
@@ -22,14 +23,11 @@ const Notifications = () => {
   }, [showMenu]);
 
   return (
-    <div id="notificationsContainer">
+    <div id="notificationsContainer" ref={ref}>
       <button
         className="btn transparent notificationButton"
         type="button"
-        onClick={(e) => {
-          e.stopPropagation();
-          setShowMenu(prev => !prev);
-        }}
+        onClick={() => setShowMenu(prev => !prev)}
       >
         <FontAwesomeIcon icon="fa-solid fa-bell" />
       </button>

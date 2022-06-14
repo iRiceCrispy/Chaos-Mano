@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,14 +8,15 @@ import './ProfileButton.scss';
 const ProfileButton = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const ref = useRef();
   const user = useSelector(getSessionUser);
   const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
-    if (!showMenu) return;
-
-    const closeMenu = () => {
-      setShowMenu(false);
+    const closeMenu = (e) => {
+      if (!ref.current?.contains(e.target)) {
+        setShowMenu(false);
+      }
     };
 
     document.addEventListener('click', closeMenu);
@@ -24,14 +25,11 @@ const ProfileButton = () => {
   }, [showMenu]);
 
   return (
-    <div className="profileContainer">
+    <div className="profileContainer" ref={ref}>
       <button
         className="btn transparent profileButton"
         type="button"
-        onClick={(e) => {
-          e.stopPropagation();
-          setShowMenu(prev => !prev);
-        }}
+        onClick={() => setShowMenu(prev => !prev)}
       >
         <FontAwesomeIcon icon="fas fa-user" />
       </button>
