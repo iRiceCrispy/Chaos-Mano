@@ -12,6 +12,12 @@ const Notification = ({ notification }) => {
     if (action === 'CREATE') {
       displayText += `created a new party: ${content.value}`;
     }
+    if (action === 'UPDATE') {
+      displayText += `updated the party: ${content.value}`;
+    }
+    if (action === 'DELETE') {
+      displayText += `deleted the party: ${content.value}`;
+    }
   }
 
   return (
