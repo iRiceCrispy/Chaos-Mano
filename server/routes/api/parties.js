@@ -98,9 +98,10 @@ router.put('/:id', validateParty, asyncHandler(async (req, res, next) => {
   await party.save();
 
   const socket = sockets[user.id];
-  socket.to(party.id).emit('updateParties');
 
-  await party.createNotification('update');
+  const notification = await party.createNotification('update');
+
+  socket.to(party.id).emit('NEW_NOTIFICATION', notification);
 
   res.json(party);
 }));
@@ -117,9 +118,10 @@ router.delete('/:id', asyncHandler(async (req, res, next) => {
   await party.remove();
 
   const socket = sockets[user.id];
-  socket.to(party.id).emit('updateParties');
 
-  await party.createNotification('delete');
+  const notification = await party.createNotification('delete');
+
+  socket.to(party.id).emit('NEW_NOTIFICATION', notification);
 
   res.json(party);
 }));
